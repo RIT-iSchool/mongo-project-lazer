@@ -1,5 +1,11 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10451123&assignment_repo_type=AssignmentRepo)
 
+<h1>Important Links:</h1>
+<ul>
+	<li>https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh</li>
+	<li>https://catalog.data.gov/dataset/meteorite-landings</li>
+</ul>
+
 <h1>Issues:</h1>
 <ul>
 	<li>Loaded in .json from NASA website, but might be hard to parse data. Need to discuss if .csv would be easier to use</li>
