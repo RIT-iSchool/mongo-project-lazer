@@ -9,6 +9,7 @@
 <h1>Issues:</h1>
 <ul>
 	<li>Loaded in .json from NASA website, but might be hard to parse data. Need to discuss if .csv would be easier to use</li>
+	<li>After more testing/research, plain Javascript cannot be used. Switched to Python/HTML instead.</li>
 </ul>
 
 <h1>Completed:</h1>
@@ -26,5 +27,5 @@
 	<li>Clean GUI design</li>
 	<li>Some documents should have images and should be stored using GridFS</li>
 	<li>User should be able to annotate the document with comments which then should be stored in the DB.</li>
-	<li>Decide which stack to use: MERN or LAMJ (Linux, Apache, MongoDB, JavaScript)</li>
+	<li>~~Decide which stack to use: MERN or LAMJ (Linux, Apache, MongoDB, JavaScript)~~</li>
 </ul>
