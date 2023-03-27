@@ -1,0 +1,5 @@
+Use CGI-BIN
+***Have to check, going to have to use separate .py file for every functionality
+    each .py file will have to rewrite the html page everytime
+
+    
