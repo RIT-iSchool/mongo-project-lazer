@@ -8,24 +8,27 @@
 
 <h1>Issues:</h1>
 <ul>
-	<li>Loaded in .json from NASA website, but might be hard to parse data. Need to discuss if .csv would be easier to use</li>
+	<li>Loaded in .json from NASA website, but might be hard to parse data. Need to discuss if .csv would be easier to use.</li>
 	<li>After more testing/research, plain Javascript cannot be used. Switched to Python/HTML instead.</li>
+	<li>Had to do research on how PyMongo and CGI modules worked.</li>
+	<li>Figured out how to clean the data properly.</li>
+	<li>Deciding how to sort and what to sort on.</li>
 </ul>
 
 <h1>Completed:</h1>
 <ul>
 	<li>Loaded in data into DB</li>
+	<li>Decide which stack to use: MERN or LAMJ (Linux, Apache, MongoDB, JavaScript)</li>
+	<li>User should be able to view the document once entering into it</li>
+	<li>User should be able to keep searching until they exit the application</li>
+	<li>Create a GUI that can search the database off of a search string</li>
+	<li>Search returns selection list of documents</li>
 </ul>
 <h1>To Do:</h1>
 <ul>
-	<li>Create a GUI that can search the database off of a search string</li>
-	<li>Search returns selection list of documents</li>
 	<li>Search should be able to organize selections by title, date, etc.</li>
 	<li>In GUI, create another search field to find records in a certain area (using MongoGeo)</li>
-	<li>User should be able to view the document once entering into it</li>
-	<li>User should be able to keep searching until they exit the application</li>
 	<li>Clean GUI design</li>
 	<li>Some documents should have images and should be stored using GridFS</li>
 	<li>User should be able to annotate the document with comments which then should be stored in the DB.</li>
-	<li>~~Decide which stack to use: MERN or LAMJ (Linux, Apache, MongoDB, JavaScript)~~</li>
 </ul>

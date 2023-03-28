@@ -1,3 +1,6 @@
+# Name - html.py
+# Purpose - file for storing the header and footer html code 
+
 header =  """
   <!DOCTYPE html>
   <html lang="en">

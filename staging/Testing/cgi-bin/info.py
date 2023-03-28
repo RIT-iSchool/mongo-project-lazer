@@ -1,3 +1,6 @@
+# Name - info.py
+# Purpose - webpage that shows user info of selected meteor 
+
 import pymongo, cgi, os, gridfs, re, html
 from pprint import pprint
 
@@ -19,6 +22,7 @@ mydoc = coll.find(
   {'_id':0, 'name':1, 'mass (g)':1, 'year':1}
 ).limit(20)
 
+#Must have for loop in order to grab data
 for x in mydoc:
   convString = str(x)
   convString = convString[1:][:-1]
