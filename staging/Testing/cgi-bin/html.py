@@ -15,10 +15,12 @@ header =  """
       <h1>Meteors List</h1>
       <form action="/cgi-bin/meteorslist.py" method="get">
         <input type="submit" value="Return Home"/>
+        <input type="hidden" name="pg" value="1">
       </form></br></br>
       <form action="/cgi-bin/result.py" method="get">
         Search: <input type="text" name="meteor_name"/><br/>
         <input type="submit" value="Submit"/>
+        <input type="hidden" name="pg" value="1">
       </form>
 
       <br/>
@@ -27,6 +29,7 @@ header =  """
         Coordinates:<br/><input type="text" name="lat"/>
         <input type="text" name="long"/><br/>
         <input type="submit" value="Submit"/>
+        <input type="hidden" name="pg" value="1">
       </form>
       <br/>
 """ 
