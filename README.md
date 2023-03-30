@@ -11,8 +11,10 @@
 	<li>Loaded in .json from NASA website, but might be hard to parse data. Need to discuss if .csv would be easier to use.</li>
 	<li>After more testing/research, plain Javascript cannot be used. Switched to Python/HTML instead.</li>
 	<li>Had to do research on how PyMongo and CGI modules worked.</li>
-	<li>Figured out how to clean the data properly.</li>
+	~~<li>Figured out how to clean the data properly.</li>~~
 	<li>Deciding how to sort and what to sort on.</li>
+	<li>Figured out that instead of parsing dictionary object to str, instead instantiate variables using the dictionary</li>
+	<li>Unsure how to send data from page to page</li>
 </ul>
 
 <h1>Completed:</h1>

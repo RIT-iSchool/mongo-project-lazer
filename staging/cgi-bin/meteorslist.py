@@ -24,7 +24,7 @@ pgNum = form.getvalue('pg')
 pgNum = int(pgNum)
 
 mydoc = coll.find(
-  {},{'_id':0, 'name':1}
+  {},{'_id':0, 'id':1, 'name':1}
 ).limit(collLimit).skip(collSkip * (pgNum - 1)) #retrieving data from MongoDB
 #limit output to 20 items, change 20 for desired number of items displayed
 
@@ -36,12 +36,12 @@ mydocCount = coll.count_documents(
   limit=collLimit
 )
 
-#takes query from MongoDB and converts dictionary type object to string
+#instantiates variables from list of dictionary items
 #prints out meteors name as links so user can view each individual meteor
 for x in mydoc:
-  convString = str(x)
-  convString = convString[10:][:-2] #substring to clean string
-  print(f"<a href='/cgi-bin/info.py?meteor_name={convString}'>{convString}</a></br>")
+  meteorID = x['id']
+  meteorName = x['name']
+  print(f"<a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a></br>")
 
 print('</br>')
 #check if back or next need to appear
