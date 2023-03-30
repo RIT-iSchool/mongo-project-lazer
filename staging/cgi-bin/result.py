@@ -28,8 +28,14 @@ meteor_name = form.getvalue('meteor_name') #gets value of name from submitted fo
 regx = re.compile("^"+meteor_name, re.IGNORECASE) #uses regex module to create regex with variable, searches for substrings, ignores case
 mydoc = coll.find(
   {'name':{'$regex':regx}}, #get name of regexed statement, returns name
-  {'_id':0, 'name':1}
+  {'_id':0, 'id':1, 'name':1} #include ID not in print but to query on
 ).limit(collLimit).skip(collSkip * (pgNum - 1)) #limit query to 20
+
+#instantiates variables from list of dictionary items
+for x in mydoc:
+  meteorID = x['id']
+  meteorName = x['name']
+  print(f"<a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a></br>")
 
 #count number of documents based off of previous query 
 #number determines if next button should appear or not
@@ -38,12 +44,6 @@ mydocCount = coll.count_documents(
   skip=(collSkip * (pgNum - 1)), 
   limit=collLimit
 )
-
-#same as meteorslist.py
-for x in mydoc:
-  convString = str(x)
-  convString = convString[10:][:-2]
-  print(f"<a href='/cgi-bin/info.py?meteor_name={convString}'>{convString}<a/></br>")
 
 print('</br>')
 #check if back or next need to appear

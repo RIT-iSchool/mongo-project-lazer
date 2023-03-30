@@ -14,31 +14,38 @@ print(html.header)
 print("<h2>Info: </h2>")
 form = cgi.FieldStorage()
 
-### REGEX
-meteor_name = form.getvalue('meteor_name')
+#Gets ID of meteor from GET request
+formMeteorID = form.getvalue('meteorID')
+meteorID = int(formMeteorID) #parsing form value
 author = form.getvalue('author')
 comment = form.getvalue('comment')
 
-regx = re.compile("^"+meteor_name, re.IGNORECASE)
-mydoc = coll.find(
-  {'name':{'$regex':regx}},
-  {'_id':0, 'name':1, 'mass (g)':1, 'year':1}
-).limit(20)
+mydoc = coll.find_one( #mydoc returns a dictionary variable
+  {"id":meteorID},
+  {"_id":0, "name":1, "mass (g)":1, "year":1} #can be changed to view desired info
+)
 
-#Must have for loop in order to grab data
-for x in mydoc:
-  convString = str(x)
-  convString = convString[1:][:-1]
-  print(f"<p'>{convString}<p/></br>")
+#instantiates variables from returned dictionary
+meteorName = mydoc['name']
+meteorMass = mydoc['mass (g)']
+meteorYear = mydoc['year']
+print(f"<p'>Name: {meteorName}<p/>")
+print(f"<p'>Mass: {meteorMass}(g)<p/>")
+print(f"<p'>Year: {meteorYear}<p/>")
 
-if author != " " and comment != " ":
-  print("<h2>if statement works</h2>")
+#ERROR CHECKING FOR COMMENTS
+if(author != None and comment != None): #checks if Nothing is submitted
+  if (author.isspace() == False and comment.isspace() == False):
+    print(f"<h2>Submitted!</h2>")
+  else:
+    print("ERROR: Nothing Submitted")
 
+#changed form to use meteorID to send data
 print(f'''<form action="/cgi-bin/info.py" method="get">
-        <input type="hidden" name="meteor_name" value="{meteor_name}">
+        <input type="hidden" name="meteorID" value="{meteorID}">
         Write a comment: </br>
-        Author: <input type="text" name="author" value=" "/><br/>
-        Comment: <input type="text" name="comment" value=" "/><br/>
+        Author: <input type="text" name="author" required/><br/>
+        Comment: <input type="text" name="comment" required/><br/>
         <input type="submit" value="Submit"/>
       </form>''')
 
