@@ -1,0 +1,3 @@
+*.DS_Store
+
+staging/cgi-bin/__pycache__/
