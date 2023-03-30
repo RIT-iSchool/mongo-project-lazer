@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name - html.py
 # Purpose - file for storing the header and footer html code 
 

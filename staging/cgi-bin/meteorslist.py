@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name - meteorslist.py
 # Purpose - main webpage that lists the initial meteors 
 

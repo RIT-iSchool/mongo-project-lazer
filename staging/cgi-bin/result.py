@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name - result.py
 # Purpose - webpage that outputs the result of a search string 
 

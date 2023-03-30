@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name - info.py
 # Purpose - webpage that shows user info of selected meteor 
 
