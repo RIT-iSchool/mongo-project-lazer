@@ -16,6 +16,9 @@ form = cgi.FieldStorage()
 
 ### REGEX
 meteor_name = form.getvalue('meteor_name')
+author = form.getvalue('author')
+comment = form.getvalue('comment')
+
 regx = re.compile("^"+meteor_name, re.IGNORECASE)
 mydoc = coll.find(
   {'name':{'$regex':regx}},
@@ -27,5 +30,17 @@ for x in mydoc:
   convString = str(x)
   convString = convString[1:][:-1]
   print(f"<p'>{convString}<p/></br>")
+
+if author != " " and comment != " ":
+  print("<h2>if statement works</h2>")
+
+print(f'''<form action="/cgi-bin/info.py" method="get">
+        <input type="hidden" name="meteor_name" value="{meteor_name}">
+        Write a comment: </br>
+        Author: <input type="text" name="author" value=" "/><br/>
+        Comment: <input type="text" name="comment" value=" "/><br/>
+        <input type="submit" value="Submit"/>
+      </form>''')
+
 
 print(html.footer)
