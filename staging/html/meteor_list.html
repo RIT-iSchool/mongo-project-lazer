@@ -12,22 +12,21 @@
   <body>
     <header>
       <div class="navbar">
-          <figure class="logo">
-              <img src="assets/images/land_logo copy.png" alt="Company Logo">
+          <figure>
+              <img class="logo" src="assets/images/navbar_logo.png" alt="Company Logo">
           </figure>
           <nav>
               <ul class="navbar">
                   <li>
                     <form action="/cgi-bin/result.py" method="get">
-                      Search: <input type="text" name="meteor_name"/><br/>
-                      <input type="submit" value="Submit"/>
+                      &emsp; <input class="meteor_search" type="text" name="meteor_name" placeholder="     Search for a meteorite..."/><br/>
                     </form>
                   </li>
+                  &emsp; &emsp;
                   <li>
                     <form action="/cgi-bin/georesult.py" method="get">
-                      Coordinates:<br/><input type="text" name="lat"/>
-                      <input type="text" name="long"/><br/>
-                      <input type="submit" value="Submit"/>
+                      Coordinates: &emsp; <input type="text" name="lat" placeholder="     Latitude..."/>
+                      <input type="text" name="long" placeholder="     Longitude..."/>
                     </form>
                   </li>
               </ul>
@@ -35,7 +34,28 @@
       </div>
     </header>
     <main>
-      <h1>Meteors List</h1>
+      <h1>Meteorite List</h1>
+      <ul class="meteor_list">
+        <li>
+          <div class="meteor-container">
+            <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
+            <img class="meteor-image" src="assets/images/meteorite_test.jpeg" alt="{meteorName}">
+          </div>
+        </li>
+        <li>
+          <div class="meteor-container">
+            <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
+            <img class="meteor-image" src="assets/images/meteorite_test.jpeg" alt="{meteorName}">
+          </div>
+        </li>
+        <li>
+          <div class="meteor-container">
+            <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
+            <img class="meteor-image" src="assets/images/meteorite_test.jpeg" alt="{meteorName}">
+          </div>
+        </li>
+      </ul>
+
       <form action="/cgi-bin/meteorslist.py" method="get">
         <input type="submit" value="Return Home"/>
       </form></br></br>
