@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Name - georesult.py
 # Purpose - webpage that outputs the result of a geosearch string
 
@@ -55,5 +57,3 @@ if mydocCount == collLimit:
   print(f'<a href="/cgi-bin/result.py?lat={meteor_lat}&long={meteor_long}&pg={pgNum + 1}">Next</a>')
 
 print(html.footer)
-
-# hi
