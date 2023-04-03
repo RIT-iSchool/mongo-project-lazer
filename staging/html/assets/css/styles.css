@@ -1,6 +1,5 @@
 * {
     font-family: 'Montserrat', sans-serif;
-    color: white;
 }
 
 /* site background color */
@@ -40,11 +39,28 @@ body {
 }
 
 /* navigation bar */
+header {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+
 .navbar {
     list-style: none;
     display: flex;
     margin: 0em;
     margin-top: 1em;
+    color: white;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul.navbar {
+    padding-right: 1em;
 }
 
 /* logo */
@@ -56,8 +72,9 @@ body {
 
 /* text input boxes */
 input[type="text"] {
-    width: 250px;
+    width: 220px;
     margin-top: 3em;
+    margin-right: 2.1em;
     border-radius: 30px;
     border-style: none;
     height: 30px;
@@ -70,6 +87,7 @@ h1 {
     font-size: 36px;
     margin-left: 1.5em;
     margin-top: 1em;
+    color: white;
 }
 
 /* meteorite list */
@@ -95,13 +113,14 @@ ul.meteor_list {
 a.meteor-container {
     color: black;
     width: 100;
-
 }
 
 .meteor-image {
-    max-width: 50%;
+    max-width: 70%;
     display: block;
     margin: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
     box-shadow: 3px 3px black;
     color: black
 }
