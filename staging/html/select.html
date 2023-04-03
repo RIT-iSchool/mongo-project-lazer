@@ -37,35 +37,22 @@
     </div>
   </header>
   <main>
-    <h1>Meteorite List</h1>
-    <ul class="meteor_list">
-      <li>
-        <div class="meteor-container">
-          <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
-          <img class="meteor-image" src="assets/images/meteorite_test.jpeg" alt="{meteorName}">
+    <h1>{meteorName}</h1>
+    <div class="info-container">
+        <img src="assets/images/meteorite_test.jpeg" alt="Meteorite Image" class="meteor-info-img"/>
+        <div class="info">
+            <p><strong>Location: </strong> </p>
+            <p><strong>Fell In: </strong> {meteorYear}</p>
+            <p><strong>Material: </strong> </p>
+            <p><strong>Class: </strong> {meteorYear}</p>
+            <p><strong>Mass: </strong> {meteorMass}</p>
         </div>
-      </li>
-      <li>
-        <div class="meteor-container">
-          <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
-          <img class="meteor-image" src="assets/images/meteorite_test.jpeg" alt="{meteorName}">
-        </div>
-      </li>
-      <li>
-        <div class="meteor-container">
-          <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
-          <img class="meteor-image" src="assets/images/meteorite_test.jpeg" alt="{meteorName}">
-        </div>
-      </li>
-    </ul>
+    </div>
+    
 
     <form action="/cgi-bin/meteorslist.py" method="get">
       <input type="submit" value="Return Home" />
     </form></br></br>
-
-    <br />
-
-
   </main>
 </body>
 

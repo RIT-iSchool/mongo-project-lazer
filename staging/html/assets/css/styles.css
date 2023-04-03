@@ -8,25 +8,24 @@ body {
     background-color: #0d0d0d;
 }
 
-/* landing image */
-#landing-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    padding-top: 9rem;
-    padding-left: 16.5em;
+/* center the landing page content */
+.center-landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-/* button to enter the site */
+/* 'enter' button to the site */
 #enter {
     color:black;
     background-color: #3991E2;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 10%;
     padding: .5rem;
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
     margin-top: 2rem;
     border-radius: 5px;
     border: none;
@@ -89,10 +88,14 @@ ul.meteor_list {
     max-width: 100%;
     margin: auto;
     margin-left: 1em;
+    text-align: center;
+    color: black;
 }
 
 a.meteor-container {
     color: black;
+    width: 100;
+
 }
 
 .meteor-image {
@@ -102,3 +105,32 @@ a.meteor-container {
     box-shadow: 3px 3px black;
     color: black
 }
+
+/* selected meteorite information */
+.info-container {
+    background-color: rgba(255, 255, 255, 0.79);
+    border-radius: 9px;
+    padding: 20px;
+    margin-bottom: 2em;
+    margin: auto;
+    margin-right: 3.5em;
+    margin-left: 3.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* meteorite info image */
+.meteor-info-img {
+    max-width: 50%;
+    display: flex;
+    box-shadow: 3px 3px black;
+}
+
+.info {
+    flex: 1;
+    margin-left: 2em;
+    font-size: 28px;
+    color: black !important;
+}
+
