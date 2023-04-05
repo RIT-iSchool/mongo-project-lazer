@@ -14,8 +14,8 @@ coll = db["landings"]
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
 #created variables for limit and skip for different pages
-collLimit = 20
-collSkip = 20
+collLimit = 6
+collSkip = 6
 
 print(html.header) #from html.py
 
@@ -38,14 +38,25 @@ mydocCount = coll.count_documents(
   limit=collLimit
 )
 
+print('''<h1>Meteorite List</h1>
+          <ul class="meteor_list">''')
 #instantiates variables from list of dictionary items
 #prints out meteors name as links so user can view each individual meteor
 for x in mydoc:
   meteorID = x['id']
   meteorName = x['name']
-  print(f"<a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a></br>")
+  print(f'''
+  <li>
+    <div class="meteor-container">
+    <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
+    <img class="meteor-image" src="../assets/images/meteorite_test.jpeg" alt="{meteorName}">
+  </li>
+  ''')
 
-print('</br>')
+print('''<form action="/cgi-bin/meteorslist.py" method="get">
+          <input type="submit" value="Return Home"/>
+          <input type="hidden" name="pg" value="1">
+        </form></br></br>''')
 #check if back or next need to appear
 if pgNum > 1:
   print(f'<a href="/cgi-bin/meteorslist.py?pg={pgNum - 1}">Back</a>')

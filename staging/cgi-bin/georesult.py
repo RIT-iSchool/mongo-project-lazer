@@ -14,8 +14,8 @@ coll = db["landings"]
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
 #created variables for limit and skip for different pages
-collLimit = 20
-collSkip = 20
+collLimit = 6
+collSkip = 6
 
 print(html.header) #from html.py
 print("<h2>Results: </h2>")
