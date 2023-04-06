@@ -34,9 +34,10 @@ header =  """
           </li>
           &emsp; &emsp;
           <li>
-            <form action="/cgi-bin/georesult.py" method="get">
+            <form action="/cgi-bin/testGeo.py" method="get">
               Coordinates: &emsp; <input type="text" name="lat" placeholder="     Latitude..." />
               <input type="text" name="long" placeholder="     Longitude..." />
+              <input type="hidden" name="pg" value="1">
             </form>
           </li>
         </ul>

@@ -13,7 +13,7 @@ coll = db["landings"]
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
 print(html.header)
-print("<h2>Info: </h2>")
+
 form = cgi.FieldStorage()
 
 #Gets ID of meteor from GET request
@@ -35,18 +35,41 @@ if(author != None and comment != None): #checks if Nothing is submitted
 
 mydoc = coll.find_one( #mydoc returns a dictionary variable
   {"id":meteorID},
-  {"_id":0, "name":1, "mass (g)":1, "year":1, "userComment":1} #can be changed to view desired info
+  {"_id":0, 
+   "name":1, 
+   "mass (g)":1, 
+   "year":1, 
+   "userComment":1, 
+   "GeoLocation":1, 
+   "recclass":1,
+   "nametype":1} #can be changed to view desired info
 )
 
 #instantiates variables from returned dictionary
 meteorName = mydoc['name']
 meteorMass = mydoc['mass (g)']
 meteorYear = mydoc['year']
+meteorGeo = mydoc['GeoLocation']
+meteorClass = mydoc['recclass']
+meteorNameType = mydoc['nametype']
 if 'userComment' in str(mydoc): #check if comments already exists
   meteorComment = mydoc['userComment']
-print(f"<p'>Name: {meteorName}<p/>")
-print(f"<p'>Mass: {meteorMass}(g)<p/>")
-print(f"<p'>Year: {meteorYear}<p/>")
+# print(f"<p'>Name: {meteorName}<p/>")
+# print(f"<p'>Mass: {meteorMass}(g)<p/>")
+# print(f"<p'>Year: {meteorYear}<p/>")
+
+print(f'''<h1>{meteorName}</h1>
+    <div class="info-container">
+        <img src="../assets/images/meteorite_test.jpeg" alt="Meteorite Image" class="meteor-info-img"/>
+        <div class="info">
+            <p><strong>Coordinates: </strong> {meteorGeo}</p>
+            <p><strong>Fell In: </strong> {meteorYear}</p>
+            <p><strong>Class: </strong> {meteorClass}</p>
+            <p><strong>Mass: </strong> {meteorMass} (g)</p>
+            <p><strong>Name Type: </strong> {meteorNameType}</p>
+        </div>
+    </div>
+      ''')
 
 #check if comments already exists
 if 'userComment' in str(mydoc):
@@ -70,5 +93,9 @@ print(f'''<form action="/cgi-bin/info.py" method="get">
         <input type="submit" value="Submit"/>
       </form>''')
 
+print('''</br><form action="/cgi-bin/meteorslist.py" method="get">
+          <input type="submit" value="Return Home"/>
+          <input type="hidden" name="pg" value="1">
+        </form></br></br>''')
 
 print(html.footer)
