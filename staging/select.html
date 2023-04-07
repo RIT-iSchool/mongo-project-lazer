@@ -15,44 +15,57 @@
   <header>
     <div class="navbar">
       <figure>
-        <img class="logo" src="assets/images/navbar_logo.png" alt="Company Logo">
+        <a href="/cgi-bin/meteorslist.py" method="get">
+          <img class="logo" src="assets/images/navbar_logo.png" alt="Company Logo">
+        </a>
       </figure>
       <nav>
         <ul class="navbar">
           <li>
             <form action="/cgi-bin/result.py" method="get">
-              &emsp; <input class="meteor_search" type="text" name="meteor_name"
-                placeholder="     Search for a meteorite..." /><br />
+              Meteorite Name: &emsp; <input class="meteor_search" type="text" name="meteor_name"
+                placeholder="Search for a meteorite..." />
+                <button class="meteor-search-btn" type="submit">Search</button>
+                <br />
             </form>
           </li>
           &emsp; &emsp;
           <li>
             <form action="/cgi-bin/georesult.py" method="get">
-              Coordinates: &emsp; <input type="text" name="lat" placeholder="     Latitude..." />
-              <input type="text" name="long" placeholder="     Longitude..." />
+              Coordinates: &emsp; <input type="text" name="lat" placeholder="Latitude..." />
+              <input type="text" name="long" placeholder="Longitude..." />
+              <button class="meteor-search-btn" type="button" 
+                onclick="if (document.getElementsByName('lat')[0].value !== '' && document.getElementsByName('long')[0].value !== '') 
+                {this.form.submit()} else {alert('Please fill in both the latitude and longitude fields.')}">Search
+              </button>
             </form>
           </li>
         </ul>
       </nav>
     </div>
   </header>
+
   <main>
     <h1>{meteorName}</h1>
     <div class="info-container">
         <img src="assets/images/meteorite_test.jpeg" alt="Meteorite Image" class="meteor-info-img"/>
         <div class="info">
-            <p><strong>Location: </strong> </p>
-            <p><strong>Fell In: </strong> {meteorYear}</p>
-            <p><strong>Material: </strong> </p>
-            <p><strong>Class: </strong> {meteorYear}</p>
+            <p><strong>Year: </strong> {meteorYear} </p>
+            <p><strong>Fell In: </strong> {meteorFall}</p>
             <p><strong>Mass: </strong> {meteorMass}</p>
+            <p><strong>Location: </strong> {geoLoc}</p>
+        </div>
+        <div class="comments">
+          <form action="/cgi-bin/info.py" method="get">
+            <input type="hidden" name="meteorID" value="{meteorID}">
+            <hr>
+            <h3>Comments: </h3></br>
+            <strong>Author: </strong><input class="comment-input" type="text" name="author" required/><br/>
+            <strong>Comment: </strong><input class="comment-input2" type="text" name="comment" required/><br/>
+            <input class="comment-submit" type="submit" value="Submit"/>
+          </form>
         </div>
     </div>
-    
-
-    <form action="/cgi-bin/meteorslist.py" method="get">
-      <input type="submit" value="Return Home" />
-    </form></br></br>
   </main>
 </body>
 

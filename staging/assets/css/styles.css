@@ -45,7 +45,6 @@ header {
     box-sizing: border-box;
 }
 
-
 .navbar {
     list-style: none;
     display: flex;
@@ -72,14 +71,29 @@ ul.navbar {
 
 /* text input boxes */
 input[type="text"] {
-    width: 220px;
-    margin-top: 3em;
+    width: 180px;
     margin-right: 2.1em;
     border-radius: 30px;
     border-style: none;
     height: 30px;
     color:black;
+    padding-left: 1em;
+}
+
+/* search buttons */
+.meteor-search-btn {
+    color:black;
+    background-color: #3991E2;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    border-radius: 5px;
+    border: none;
+    letter-spacing: 1px;
     font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.5s ease;
 }
 
 /* page header */
@@ -88,31 +102,52 @@ h1 {
     margin-left: 1.5em;
     margin-top: 1em;
     color: white;
+    display: inline-block;
+}
+
+/* filter button */
+.filter {
+    margin-left: 3.5em;
+    color: white;
+    margin-top: -1em;
+    margin-bottom: 2em;
 }
 
 /* meteorite list */
+span {
+    font-size: 20px;
+}
+
+.meteor_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
 ul.meteor_list {
     list-style-type: none;
-    display: flex;
-    max-width: 1300px;
     margin: auto;
+}
+
+.meteor_list li {
+    box-sizing: border-box;   
+    flex-basis: calc(33.33% - 10px); /* 10px is the total margin between li elements */
+    margin-bottom: 20px;
 }
 
 .meteor-container {
     background-color: rgba(255, 255, 255, 0.79);
     border-radius: 9px;
     padding: 10px;
-    margin-bottom: 10px;
-    max-width: 100%;
-    margin: auto;
-    margin-left: 1em;
+    max-width: 80%;
+    margin: 10px;
     text-align: center;
     color: black;
 }
 
 a.meteor-container {
     color: black;
-    width: 100;
+    width: 100%;
 }
 
 .meteor-image {
@@ -134,22 +169,59 @@ a.meteor-container {
     margin: auto;
     margin-right: 3.5em;
     margin-left: 3.5em;
-    display: flex;
-    flex-direction: row;
+    display: grid; /* use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* two columns of equal width */
+    grid-template-rows: auto auto; /* two rows with variable height */
+    grid-gap: 1em; /* gap between grid items */
     align-items: center;
 }
+    /* meteorite info image */
+    .meteor-info-img {
+        max-width: 100%; /* take up all the space in the first column */
+        grid-row: span 2; /* span two rows */
+        box-shadow: 3px 3px black;
+    }
 
-/* meteorite info image */
-.meteor-info-img {
-    max-width: 50%;
-    display: flex;
-    box-shadow: 3px 3px black;
+    .info {
+        font-size: 28px;
+        color: black !important;
+        line-height: 3em;
+        margin-left: 1em;
+    }
+
+/* comment section */
+.comments {
+    grid-column: 1 / span 2; /* span both columns */
+    margin-top: 1em; /* add some space between the info and comments sections */
 }
 
-.info {
-    flex: 1;
-    margin-left: 2em;
-    font-size: 28px;
-    color: black !important;
+h3 {
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
+.comment-input {
+    margin-left: 1em;
+    margin-bottom: 2em;
+    margin-top: 1em;
+}
+
+.comment-input2 {
+    margin-left: 1em;
+    margin-bottom: 4em;
+}
+
+.comment-submit {
+    color:black;
+    background-color: #3991E2;
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 5px;
+    border: none;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 13px;
+    transition: background-color 0.5s ease;
+}
