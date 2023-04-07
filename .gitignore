@@ -1,3 +1,4 @@
 *.DS_Store
 
 staging/cgi-bin/__pycache__/
+staging/assets/images/

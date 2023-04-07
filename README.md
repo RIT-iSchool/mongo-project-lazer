@@ -15,6 +15,9 @@
 	<li>Deciding how to sort and what to sort on.</li>
 	<li>Figured out that instead of parsing dictionary object to str, instead instantiate variables using the dictionary</li>
 	<li>Unsure how to send data from page to page</li>
+	<li>Had to figure out how to properly correlate the images to the meteor name</li>
+	<li>Figured out how to only have the necessary images in the images folder for each page</li>
+	<li>In Windows, file names are not case-sensitive, where Linux is. Had to have the EXACT name for each image, case sensitive.</li>
 </ul>
 
 <h1>Completed:</h1>
@@ -25,12 +28,12 @@
 	<li>User should be able to keep searching until they exit the application</li>
 	<li>Create a GUI that can search the database off of a search string</li>
 	<li>Search returns selection list of documents</li>
+	<li>Clean GUI design</li>
+	<li>Some documents should have images and should be stored using GridFS</li>
 </ul>
 <h1>To Do:</h1>
 <ul>
 	<li>Search should be able to organize selections by title, date, etc.</li>
 	<li>In GUI, create another search field to find records in a certain area (using MongoGeo)</li>
-	<li>Clean GUI design</li>
-	<li>Some documents should have images and should be stored using GridFS</li>
 	<li>User should be able to annotate the document with comments which then should be stored in the DB.</li>
 </ul>

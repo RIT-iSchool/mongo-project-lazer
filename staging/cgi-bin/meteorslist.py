@@ -11,6 +11,12 @@ client = pymongo.MongoClient("mongodb://root:student@localhost:27017")
 db = client["meteorcsv"]
 coll = db["landings"]
 fs = gridfs.GridFS(db)
+fsFilesColl = db["fs.files"]
+
+#Deletes all images in images folder
+imgDir = 'assets/images'
+for f in os.listdir(imgDir):
+  os.remove(os.path.join(imgDir, f))
 
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
@@ -39,15 +45,7 @@ mydocCount = coll.count_documents(
   limit=collLimit
 )
 
-fsFilesColl = db["fs.files"]
-cursor = fsFilesColl.find({}).sort("_id", -1)
-for item in cursor:
-  new_img = fs.get(item['_id']).read()
-  filename = item['filename']
-
-  with open(f"assets/images/{filename}", "wb") as outfile:
-    outfile.write(new_img)
-  #print(f'<img alt="{filename}" src="../assets/images/{filename}" width=500') #sets img as file that was just written out to
+#print(f'<img alt="{filename}" src="../assets/images/{filename}" width=500') #sets img as file that was just written out to
 
 print('''<h1>Meteorite List</h1>
           <ul class="meteor_list">''')
@@ -56,7 +54,17 @@ print('''<h1>Meteorite List</h1>
 for x in mydoc:
   meteorID = x['id']
   meteorName = x['name']
+  imgSearch = meteorName.lower() + ".jpg"
   DEFAULT_IMG = 'default.jpg'
+
+  cursor = fsFilesColl.find({"filename":imgSearch}).limit(1)
+  for item in cursor:
+    new_img = fs.get(item['_id']).read()
+    filename = item['filename']
+
+    with open(f"assets/images/{filename}", "wb") as outfile:
+      outfile.write(new_img)
+
   print(f'''
   <li>
     <div class="meteor-container">
@@ -70,7 +78,7 @@ for x in mydoc:
     ''')
   else:
     print(f'''
-          <img class="meteor-image" src="../assets/images/{DEFAULT_IMG}" alt="{meteorName}"> 
+          <img class="meteor-image" src="../assets/logos/{DEFAULT_IMG}" alt="{meteorName}"> 
         </div>
       </li>
     ''')

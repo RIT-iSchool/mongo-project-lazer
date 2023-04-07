@@ -21,7 +21,7 @@ header =  """
   <header>
     <div class="navbar">
       <figure>
-        <img class="logo" src="/assets/images/navbar_logo.png" alt="Company Logo">
+        <img class="logo" src="/assets/logos/navbar_logo.png" alt="Company Logo">
       </figure>
       <nav>
         <ul class="navbar">

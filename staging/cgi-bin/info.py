@@ -9,6 +9,13 @@ from pprint import pprint
 client = pymongo.MongoClient("mongodb://root:student@localhost:27017")
 db = client["meteorcsv"]
 coll = db["landings"]
+fs = gridfs.GridFS(db)
+fsFilesColl = db["fs.files"]
+
+#Deletes all images in images folder
+imgDir = 'assets/images'
+for f in os.listdir(imgDir):
+  os.remove(os.path.join(imgDir, f))
 
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
@@ -54,13 +61,35 @@ meteorClass = mydoc['recclass']
 meteorNameType = mydoc['nametype']
 if 'userComment' in str(mydoc): #check if comments already exists
   meteorComment = mydoc['userComment']
-# print(f"<p'>Name: {meteorName}<p/>")
-# print(f"<p'>Mass: {meteorMass}(g)<p/>")
-# print(f"<p'>Year: {meteorYear}<p/>")
+
+imgSearch = meteorName.lower() + ".jpg"
+DEFAULT_IMG = 'default.jpg'
+
+cursor = fsFilesColl.find({"filename":imgSearch}).limit(1)
+for item in cursor:
+  new_img = fs.get(item['_id']).read()
+  filename = item['filename']
+
+  with open(f"assets/images/{filename}", "wb") as outfile:
+    outfile.write(new_img)
 
 print(f'''<h1>{meteorName}</h1>
-    <div class="info-container">
-        <img src="../assets/images/meteorite_test.jpeg" alt="Meteorite Image" class="meteor-info-img"/>
+    <div class="info-container">''')
+if os.path.isfile(f"assets/images/{meteorName.lower()}.jpg"): #if the name of the meteor is found in the image folder
+  print(f'''
+        <img src="../assets/images/{meteorName.lower()}.jpg" alt="Meteorite Image" class="meteor-info-img"/>
+        <div class="info">
+            <p><strong>Coordinates: </strong> {meteorGeo}</p>
+            <p><strong>Fell In: </strong> {meteorYear}</p>
+            <p><strong>Class: </strong> {meteorClass}</p>
+            <p><strong>Mass: </strong> {meteorMass} (g)</p>
+            <p><strong>Name Type: </strong> {meteorNameType}</p>
+        </div>
+    </div>
+      ''')
+else: #If image is not found in assets/images
+  print(f'''
+        <img src="../assets/logos/{DEFAULT_IMG}" alt="Meteorite Image" class="meteor-info-img"/>
         <div class="info">
             <p><strong>Coordinates: </strong> {meteorGeo}</p>
             <p><strong>Fell In: </strong> {meteorYear}</p>
