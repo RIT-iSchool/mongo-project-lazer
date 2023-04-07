@@ -18,6 +18,8 @@
 	<li>Had to figure out how to properly correlate the images to the meteor name</li>
 	<li>Figured out how to only have the necessary images in the images folder for each page</li>
 	<li>In Windows, file names are not case-sensitive, where Linux is. Had to have the EXACT name for each image, case sensitive.</li>
+	<li>Had trouble with foreign latin characters, figured out how to use encoding/decoding</li>
+	<li>Issues with sorting as not every field contained information. For example, many meteors do not have year's or masses'</li>
 </ul>
 
 <h1>Completed:</h1>
