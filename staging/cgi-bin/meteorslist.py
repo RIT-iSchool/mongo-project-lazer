@@ -10,6 +10,7 @@ from pprint import pprint
 client = pymongo.MongoClient("mongodb://root:student@localhost:27017")
 db = client["meteorcsv"]
 coll = db["landings"]
+fs = gridfs.GridFS(db)
 
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
@@ -38,6 +39,16 @@ mydocCount = coll.count_documents(
   limit=collLimit
 )
 
+fsFilesColl = db["fs.files"]
+cursor = fsFilesColl.find({}).sort("_id", -1)
+for item in cursor:
+  new_img = fs.get(item['_id']).read()
+  filename = item['filename']
+
+  with open(f"assets/images/{filename}", "wb") as outfile:
+    outfile.write(new_img)
+  #print(f'<img alt="{filename}" src="../assets/images/{filename}" width=500') #sets img as file that was just written out to
+
 print('''<h1>Meteorite List</h1>
           <ul class="meteor_list">''')
 #instantiates variables from list of dictionary items
@@ -45,13 +56,24 @@ print('''<h1>Meteorite List</h1>
 for x in mydoc:
   meteorID = x['id']
   meteorName = x['name']
+  DEFAULT_IMG = 'default.jpg'
   print(f'''
   <li>
     <div class="meteor-container">
     <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
-    <img class="meteor-image" src="../assets/images/meteorite_test.jpeg" alt="{meteorName}">
-  </li>
   ''')
+  if os.path.isfile(f"assets/images/{meteorName}.jpg"): #if the name of the meteor is found in the image folder
+    print(f'''
+          <img class="meteor-image" src="../assets/images/{meteorName}.jpg" alt="{meteorName}">
+        </div>
+      </li>
+    ''')
+  else:
+    print(f'''
+          <img class="meteor-image" src="../assets/images/{DEFAULT_IMG}" alt="{meteorName}"> 
+        </div>
+      </li>
+    ''')
 
 print('''<form action="/cgi-bin/meteorslist.py" method="get">
           <input type="submit" value="Return Home"/>
