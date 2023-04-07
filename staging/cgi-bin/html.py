@@ -28,16 +28,19 @@ header =  """
           <li>
             <form action="/cgi-bin/result.py" method="get">
               &emsp; <input class="meteor_search" type="text" name="meteor_name"
-                placeholder="     Search for a meteorite..." /><br />
+                placeholder="     Search for a meteorite..." required/><br />
                 <input type="hidden" name="pg" value="1">
             </form>
           </li>
           &emsp; &emsp;
           <li>
-            <form action="/cgi-bin/testGeo.py" method="get">
-              Coordinates: &emsp; <input type="text" name="lat" placeholder="     Latitude..." />
-              <input type="text" name="long" placeholder="     Longitude..." />
-              <input type="hidden" name="pg" value="1">
+            <form action="/cgi-bin/georesult.py" method="get">
+              Coordinates: &emsp; <input type="text" name="lat" placeholder="Latitude..." />
+              <input type="text" name="long" placeholder="Longitude..." />
+              <button class="meteor-search-btn" type="button" 
+                onclick="if (document.getElementsByName('lat')[0].value !== '' && document.getElementsByName('long')[0].value !== '') 
+                {this.form.submit()} else {alert('Please fill in both the latitude and longitude fields.')}">Search
+              </button>
             </form>
           </li>
         </ul>
