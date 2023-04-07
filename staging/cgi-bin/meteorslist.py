@@ -62,9 +62,9 @@ for x in mydoc:
     <div class="meteor-container">
     <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
   ''')
-  if os.path.isfile(f"assets/images/{meteorName}.jpg"): #if the name of the meteor is found in the image folder
+  if os.path.isfile(f"assets/images/{meteorName.lower()}.jpg"): #if the name of the meteor is found in the image folder
     print(f'''
-          <img class="meteor-image" src="../assets/images/{meteorName}.jpg" alt="{meteorName}">
+          <img class="meteor-image" src="../assets/images/{meteorName.lower()}.jpg" alt="{meteorName}">
         </div>
       </li>
     ''')
