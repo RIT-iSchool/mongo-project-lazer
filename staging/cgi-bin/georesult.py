@@ -14,8 +14,8 @@ coll = db["landings"]
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
 #created variables for limit and skip for different pages
-collLimit = 6
-collSkip = 6
+collLimit = 20
+collSkip = 20
 
 print(html.header) #from html.py
 print("<h2>Results: </h2>")
@@ -28,10 +28,30 @@ pgNum = int(pgNum)
 ### REGEX
 meteor_lat = form.getvalue('lat') #gets value of name from submitted form (GET)
 meteor_long = form.getvalue('long')
+print( "meteor_lat: " + meteor_lat ); 
+print( "<br>meteor_long: " + meteor_long );
+
+import cgitb
+cgitb.enable()
 
 from bson.son import SON
+
 gquery = {"loc": SON([("$near", [meteor_lat, meteor_long]), ("$maxDistance", 100)])}, {'_id':0, 'id':1, 'name':1, 'reclat':1, 'reclong':1} 
-mydoc = coll.find(gquery).limit(collLimit).skip(collSkip * (pgNum - 1)) #limit query to 20
+
+gquery = {
+  "loc": { 
+    "$near": {
+      "$geometry": {
+        "type": "Point" ,
+        "coordinates": [ float(meteor_long), float(meteor_lat) ] 
+      }, 
+      "$maxDistance": 100
+    }
+  }
+}
+project = {'_id':0, 'id':1, 'name':1, 'reclat':1, 'reclong':1}
+print("<pre>" + str(gquery) + "</pre>" )
+mydoc = coll.find(gquery,project).limit(collLimit).skip(collSkip * (pgNum - 1)) #limit query to 20
 
 #instantiates variables from list of dictionary items
 for x in mydoc:
