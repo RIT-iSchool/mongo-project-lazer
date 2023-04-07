@@ -54,6 +54,7 @@ print('''<h1>Meteorite List</h1>
 for x in mydoc:
   meteorID = x['id']
   meteorName = x['name']
+  meteorName = meteorName.encode('unicode_escape').decode('CP1252') #used to parse the latin characters
   imgSearch = meteorName.lower() + ".jpg"
   DEFAULT_IMG = 'default.jpg'
 

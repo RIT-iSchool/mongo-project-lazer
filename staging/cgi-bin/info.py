@@ -54,6 +54,7 @@ mydoc = coll.find_one( #mydoc returns a dictionary variable
 
 #instantiates variables from returned dictionary
 meteorName = mydoc['name']
+meteorName = meteorName.encode(encoding='ascii', errors="xmlcharrefreplace").decode('CP1252') #used to parse the latin characters
 meteorMass = mydoc['mass (g)']
 meteorYear = mydoc['year']
 meteorGeo = mydoc['GeoLocation']
