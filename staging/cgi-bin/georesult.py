@@ -5,6 +5,8 @@
 
 import pymongo, cgi, os, gridfs, re, html
 from pprint import pprint
+from pymongo import MongoClient
+from pymongo import GEO2D
 
 #connecting to the database, getting the landings collection
 client = pymongo.MongoClient("mongodb://root:student@localhost:27017")
@@ -26,12 +28,42 @@ pgNum = form.getvalue('pg')
 pgNum = int(pgNum)
 
 ### REGEX
+coll.create_index([("loc", GEO2D)])
+
 meteor_lat = form.getvalue('lat') #gets value of name from submitted form (GET)
 meteor_long = form.getvalue('long')
 
-from bson.son import SON
-gquery = {"loc": SON([("$near", [meteor_lat, meteor_long]), ("$maxDistance", 100)])}, {'_id':0, 'id':1, 'name':1, 'reclat':1, 'reclong':1} 
-mydoc = coll.find(gquery).limit(collLimit).skip(collSkip * (pgNum - 1)) #limit query to 20
+#new
+print( "meteor_lat: " + meteor_lat );
+print( "meteor_long: " + meteor_long );
+
+#for doc in coll.find({"loc": {"$near":[float(meteor_lat), float(meteor_long)]}}).limit(20):    -- for testing
+  #pprint.pprint(doc)
+
+import cgitb
+cgitb.enable()
+
+#from bson.son import SON
+#gquery = {'loc': SON([("$near", [meteor_long, meteor_lat]), ("$maxDistance", 100)])}, {'_id':0, 'id':1, 'name':1, 'reclat':1, 'reclong':1} 
+
+gquery = {
+  "loc": {
+    "$near": {
+      "$geometry": {
+        "type": "Point" ,
+        "coordinates": [ float(meteor_long), float(meteor_lat) ]
+      },
+      "$maxDistance": 100
+    }
+  }
+}
+project = {'_id':0, 'id':1, 'name':1, 'reclat':1, 'reclong':1}
+print("<pre>" + str(gquery) + "</pre>")
+mydoc = coll.find(gquery,project).limit(collLimit).skip(collSkip * (pgNum - 1)) #limit query to 20
+print(mydoc)
+
+#for mydoc in coll.find({"loc": {"$near": [meteor_long, meteor_lat]}}).limit(20):
+#  gquery = pprint.pprint(mydoc)
 
 #instantiates variables from list of dictionary items
 for x in mydoc:
