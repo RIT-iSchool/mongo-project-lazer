@@ -193,7 +193,6 @@ a.meteor-container {
 .comments {
     grid-column: 1 / span 2; /* span both columns */
     margin-top: 1em; /* add some space between the info and comments sections */
-    color: white;
 }
 
 h3 {
@@ -209,7 +208,7 @@ h3 {
 
 .comment-input2 {
     margin-left: 1em;
-    margin-bottom: 4em;
+    margin-bottom: 2em;
 }
 
 .comment-submit {
@@ -220,6 +219,7 @@ h3 {
     padding-top: 1em;
     padding-bottom: 1em;
     border-radius: 5px;
+    margin-bottom: 3em;
     border: none;
     letter-spacing: 1px;
     font-weight: bold;
@@ -229,15 +229,19 @@ h3 {
 
 .author{
     list-style-type: none;
-    font-size: 2em;
-    color: white;
 }
 
 .authorComment{
     color: black;
     list-style-type: none;
-    padding-left: 1em;
 }
+
+.comment-section {
+    background-color: whitesmoke;
+    border-radius: 1em;
+    line-height: 2em;
+}
+
 
 .nextback{
     background-color: blue;

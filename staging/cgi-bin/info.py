@@ -106,12 +106,12 @@ print(f'''
 print(f'''<form action="/cgi-bin/info.py" method="get">
             <input type="hidden" name="meteorID" value="{meteorID}">
             <hr>
-            <h3>Comments: </h3></br>
+            <h3>Comments: </h3>
             <strong>Author: </strong><input class="comment-input" type="text" name="author" required/><br/>
-            <strong>Comment: </strong><input class="comment-input2" type="text" name="comment" required/><br/>
+            <strong>Comment: </strong><input class="comment-input2" type="text" name="comment" required/><br>
             <input class="comment-submit" type="submit" value="Submit"/>
           </form>
-        
+          <h3> Comment Section: </h3>
           ''')
 
 #check if comments already exists
@@ -120,10 +120,12 @@ if 'userComment' in str(mydoc):
   for document in meteorComment:
     for returnedAuthor, returnedComment in document.items(): #getting the key value pairs of each document
       print(f'''
+      <div class="comment-section">
         <ul>
-          <li class="author">{returnedAuthor}</li>
-          <li class="authorComment">{returnedComment}</li>
+          <li class="author"><strong>Name: </strong>{returnedAuthor}</li>
+          <li class="authorComment"><strong>Comment: </strong>{returnedComment}</li>
         </ul>
+      </div>
       ''')
     #print(f"<p>Comment: {list(userComment)}<p/>")
 print(f'''
