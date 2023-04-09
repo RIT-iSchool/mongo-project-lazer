@@ -47,8 +47,27 @@ mydocCount = coll.count_documents(
 
 #print(f'<img alt="{filename}" src="../assets/images/{filename}" width=500') #sets img as file that was just written out to
 
-print('''<h1>Meteorite List</h1>
-          <ul class="meteor_list">''')
+print('''<div class="filter-container">
+      <h1>Meteorite List</h1>
+      <form class="filter">
+        
+        <label class="radio-inline">
+          Filter By:
+          <input type="radio" name="optradio" checked>Year
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="optradio">Mass
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="optradio">Ascending
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="optradio">Descending
+        </label>
+      </form>
+    </div>
+    <div class="meteor-list">
+      <ul class="meteor_list">''')
 #instantiates variables from list of dictionary items
 #prints out meteors name as links so user can view each individual meteor
 for x in mydoc:
@@ -84,10 +103,6 @@ for x in mydoc:
       </li>
     ''')
 
-print('''<form action="/cgi-bin/meteorslist.py" method="get">
-          <input type="submit" value="Return Home"/>
-          <input type="hidden" name="pg" value="1">
-        </form></br></br>''')
 #check if back or next need to appear
 if pgNum > 1:
   print(f'<a href="/cgi-bin/meteorslist.py?pg={pgNum - 1}">Back</a>')

@@ -74,7 +74,8 @@ for item in cursor:
   with open(f"assets/images/{filename}", "wb") as outfile:
     outfile.write(new_img)
 
-print(f'''<h1>{meteorName}</h1>
+print(f'''
+    <h1>{meteorName}</h1>
     <div class="info-container">''')
 if os.path.isfile(f"assets/images/{meteorName.lower()}.jpg"): #if the name of the meteor is found in the image folder
   print(f'''
@@ -86,8 +87,7 @@ if os.path.isfile(f"assets/images/{meteorName.lower()}.jpg"): #if the name of th
             <p><strong>Mass: </strong> {meteorMass} (g)</p>
             <p><strong>Name Type: </strong> {meteorNameType}</p>
         </div>
-    </div>
-      ''')
+''')
 else: #If image is not found in assets/images
   print(f'''
         <img src="../assets/logos/{DEFAULT_IMG}" alt="Meteorite Image" class="meteor-info-img"/>
@@ -98,8 +98,7 @@ else: #If image is not found in assets/images
             <p><strong>Mass: </strong> {meteorMass} (g)</p>
             <p><strong>Name Type: </strong> {meteorNameType}</p>
         </div>
-    </div>
-      ''')
+  ''')
 
 #check if comments already exists
 if 'userComment' in str(mydoc):
@@ -114,18 +113,19 @@ if 'userComment' in str(mydoc):
       ''')
     #print(f"<p>Comment: {list(userComment)}<p/>")
 
+print(f'''
+    <div class="comments">''')
 #changed form to use meteorID to send data
 print(f'''<form action="/cgi-bin/info.py" method="get">
-        <input type="hidden" name="meteorID" value="{meteorID}">
-        Write a comment: </br>
-        Author: <input type="text" name="author" value="" required/><br/>
-        Comment: <input type="text" name="comment" value="" required/><br/>
-        <input type="submit" value="Submit"/>
-      </form>''')
-
-print('''</br><form action="/cgi-bin/meteorslist.py" method="get">
-          <input type="submit" value="Return Home"/>
-          <input type="hidden" name="pg" value="1">
-        </form></br></br>''')
+            <input type="hidden" name="meteorID" value="{meteorID}">
+            <hr>
+            <h3>Comments: </h3></br>
+            <strong>Author: </strong><input class="comment-input" type="text" name="author" required/><br/>
+            <strong>Comment: </strong><input class="comment-input2" type="text" name="comment" required/><br/>
+            <input class="comment-submit" type="submit" value="Submit"/>
+          </form>
+        </div>
+      </div>
+          ''')
 
 print(html.footer)

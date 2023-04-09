@@ -27,24 +27,10 @@ header =  """
         <ul class="navbar">
           <li>
             <form action="/cgi-bin/result.py" method="get">
-              &emsp; <input class="meteor_search" type="text" name="meteor_name"
-                placeholder="     Search for a meteorite..."/><br />
-                <input type="hidden" name="pg" value="1">
-
-                <input type="radio" id="name1" name="sort" value="name">
-                <label for="name1">Name</label></br>
-
-                <input type="radio" id="mass1" name="sort" value="mass (g)">
-                <label for="mass1">Mass</label></br>
-
-                <input type="radio" id="year1" name="sort" value="year">
-                <label for="year1">Year</label>
-                </br></br>
-                <input type="radio" id="asc" name="direction" value="-1">
-                <label for="asc">Ascending</label>
-                <input type="radio" id="dsc" name="direction" value="1">
-                <label for="dsc">Descending</label>
-                <input type="submit" value="Submit">
+              Meteorite Name: &emsp; <input class="meteor_search" type="text" name="meteor_name"
+                placeholder="Search for a meteorite..." />
+                <button class="meteor-search-btn" type="submit">Search</button>
+                <br />
             </form>
           </li>
           &emsp; &emsp;
@@ -59,9 +45,6 @@ header =  """
             </form>
           </li>
         </ul>
-          <form action="/cgi-bin/result.py" method="get">
-          
-          </form>
       </nav>
     </div>
   </header>
