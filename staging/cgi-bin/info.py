@@ -100,19 +100,6 @@ else: #If image is not found in assets/images
         </div>
   ''')
 
-#check if comments already exists
-if 'userComment' in str(mydoc):
-  #iterating over the array of documents
-  for document in meteorComment:
-    for returnedAuthor, returnedComment in document.items(): #getting the key value pairs of each document
-      print(f'''
-        <ul>
-          <li>Author: {returnedAuthor}</li>
-          <li>{returnedComment}</li>
-        </ul>
-      ''')
-    #print(f"<p>Comment: {list(userComment)}<p/>")
-
 print(f'''
     <div class="comments">''')
 #changed form to use meteorID to send data
@@ -124,8 +111,22 @@ print(f'''<form action="/cgi-bin/info.py" method="get">
             <strong>Comment: </strong><input class="comment-input2" type="text" name="comment" required/><br/>
             <input class="comment-submit" type="submit" value="Submit"/>
           </form>
-        </div>
-      </div>
+        
           ''')
 
+#check if comments already exists
+if 'userComment' in str(mydoc):
+  #iterating over the array of documents
+  for document in meteorComment:
+    for returnedAuthor, returnedComment in document.items(): #getting the key value pairs of each document
+      print(f'''
+        <ul>
+          <li class="author">{returnedAuthor}</li>
+          <li class="authorComment">{returnedComment}</li>
+        </ul>
+      ''')
+    #print(f"<p>Comment: {list(userComment)}<p/>")
+print(f'''
+  </div>
+      </div>''')
 print(html.footer)

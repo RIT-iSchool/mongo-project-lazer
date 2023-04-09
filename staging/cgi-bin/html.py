@@ -21,7 +21,7 @@ header =  """
   <header>
     <div class="navbar">
       <figure>
-        <img class="logo" src="/assets/logos/navbar_logo.png" alt="Company Logo">
+        <a href="/cgi-bin/meteorslist.py?pg=1"><img class="logo" src="/assets/logos/navbar_logo.png" alt="Company Logo"></a>
       </figure>
       <nav>
         <ul class="navbar">
@@ -31,6 +31,18 @@ header =  """
                 placeholder="Search for a meteorite..." />
                 <button class="meteor-search-btn" type="submit">Search</button>
                 <br />
+                <input type="hidden" name="pg" value="1">
+                <input type="radio" id="name1" name="sort" value="name">
+                <label for="name1">Name</label></br>
+                <input type="radio" id="mass1" name="sort" value="mass (g)">
+                <label for="mass1">Mass</label></br>
+                <input type="radio" id="year1" name="sort" value="year">
+                <label for="year1">Year</label>
+                </br></br>
+                <input type="radio" id="asc" name="direction" value="1">
+                <label for="asc">Ascending</label>
+                <input type="radio" id="dsc" name="direction" value="-1">
+                <label for="dsc">Descending</label>
             </form>
           </li>
           &emsp; &emsp;

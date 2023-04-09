@@ -226,3 +226,23 @@ h3 {
     font-size: 13px;
     transition: background-color 0.5s ease;
 }
+
+.author{
+    list-style-type: none;
+    font-size: 2em;
+    color: white;
+}
+
+.authorComment{
+    color: black;
+    list-style-type: none;
+    padding-left: 1em;
+}
+
+.nextback{
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

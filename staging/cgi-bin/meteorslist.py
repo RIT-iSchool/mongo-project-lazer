@@ -49,23 +49,6 @@ mydocCount = coll.count_documents(
 
 print('''<div class="filter-container">
       <h1>Meteorite List</h1>
-      <form class="filter">
-        
-        <label class="radio-inline">
-          Filter By:
-          <input type="radio" name="optradio" checked>Year
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="optradio">Mass
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="optradio">Ascending
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="optradio">Descending
-        </label>
-      </form>
-    </div>
     <div class="meteor-list">
       <ul class="meteor_list">''')
 #instantiates variables from list of dictionary items
@@ -104,10 +87,15 @@ for x in mydoc:
     ''')
 
 #check if back or next need to appear
+print(f'''</div>
+  <div style="display: flex;
+    align-items: center;
+    justify-content: center;">''')
 if pgNum > 1:
-  print(f'<a href="/cgi-bin/meteorslist.py?pg={pgNum - 1}">Back</a>')
+  print(f'<a href="/cgi-bin/meteorslist.py?pg={pgNum - 1}" style="padding: 1em">Back</a>')
 if mydocCount == collLimit:
-  print(f'<a href="/cgi-bin/meteorslist.py?pg={pgNum + 1}">Next</a>')
-
+  print(f'<a href="/cgi-bin/meteorslist.py?pg={pgNum + 1}" style="padding: 1em">Next</a>')
+print(f'''
+  </div>''')
 print(html.footer)
 
