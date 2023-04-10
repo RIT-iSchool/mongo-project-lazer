@@ -12,20 +12,23 @@ from pymongo import GEO2D
 client = pymongo.MongoClient("mongodb://root:student@localhost:27017")
 db = client["meteorcsv"]
 coll = db["landings"]
+fs = gridfs.GridFS(db)
+fsFilesColl = db["fs.files"]
+
+#Deletes all images in images folder
+imgDir = 'assets/images'
+for f in os.listdir(imgDir):
+  os.remove(os.path.join(imgDir, f))
 
 print( 'Content-Type: text/html;charset=utf-8\r\n\r\n' )
 
 #created variables for limit and skip for different pages
-collLimit = 20
-collSkip = 20
+collLimit = 6
+collSkip = 6
+mydocCount = 0
 
 print(html.header) #from html.py
-print("<h2>Results: </h2>")
 form = cgi.FieldStorage() #get data from url/form data
-
-#get the value of page number in get request/url
-pgNum = form.getvalue('pg')
-pgNum = int(pgNum)
 
 ### REGEX
 coll.drop_indexes
@@ -33,10 +36,9 @@ coll.create_index([("location", GEO2D)])
 
 meteor_lat = form.getvalue('lat') #gets value of name from submitted form (GET)
 meteor_long = form.getvalue('long')
-max_distance = 100000
-
 met_lat = float(meteor_lat)
 met_long = float(meteor_long)
+max_distance = 100000
 
 results = coll.find({
   "location": {
@@ -57,29 +59,48 @@ gquery = coll.find({
   ]
 })
 
-
+print('''<h1>Meteorite List</h1>
+          <ul class="meteor_list">''')
 #instantiates variables from list of dictionary items
 for x in gquery:
   meteorID = x['id']
   meteorName = x['name']
-  meteorLat = x['reclat']
-  meteorLong = x['reclong']
-  print(f"<a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a></br>")
+  meteorName = meteorName.encode(encoding='ascii', errors="xmlcharrefreplace").decode('CP1252') #used to parse the latin characters
+  imgSearch = meteorName.lower() + ".jpg"
+  DEFAULT_IMG = 'default.jpg'
 
-#count number of documents based off of previous query 
-#number determines if next button should appear or not
-mydocCount = coll.count_documents(
-  gquery, 
-  skip=(collSkip * (pgNum - 1)), 
-  limit=collLimit
-)
+  cursor = fsFilesColl.find({"filename":imgSearch}).limit(1)
+  for item in cursor:
+    new_img = fs.get(item['_id']).read()
+    filename = item['filename']
+
+    with open(f"assets/images/{filename}", "wb") as outfile:
+      outfile.write(new_img)
+
+  print(f'''
+  <li>
+    <div class="meteor-container">
+    <a href='/cgi-bin/info.py?meteorID={meteorID}'>{meteorName}</a>
+  ''')
+  if os.path.isfile(f"assets/images/{meteorName.lower()}.jpg"): #if the name of the meteor is found in the image folder
+    print(f'''
+          <img class="meteor-image" src="../assets/images/{meteorName.lower()}.jpg" alt="{meteorName}">
+        </div>
+      </li>
+    ''')
+  else:
+    print(f'''
+          <img class="meteor-image" src="../assets/logos/{DEFAULT_IMG}" alt="{meteorName}"> 
+        </div>
+      </li>
+    ''')
+
+print('''<form action="/cgi-bin/meteorslist.py" method="get">
+          <input type="submit" value="Return Home"/>
+          <input type="hidden" name="pg" value="1">
+        </form></br></br>''')
 
 print('</br>')
-#check if back or next need to appear
-if pgNum > 1:
-  print(f'<a href="/cgi-bin/result.py?lat={meteor_lat}&long={meteor_long}&pg={pgNum - 1}">Back</a>')
-if mydocCount == collLimit:
-  print(f'<a href="/cgi-bin/result.py?lat={meteor_lat}&long={meteor_long}&pg={pgNum + 1}">Next</a>')
 
 print(html.footer)
 
