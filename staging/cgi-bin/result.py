@@ -94,11 +94,6 @@ for x in mydoc:
       </li>
     ''')
 
-print('''<form action="/cgi-bin/meteorslist.py" method="get">
-          <input type="submit" value="Return Home"/>
-          <input type="hidden" name="pg" value="1">
-        </form></br></br>''')
-
 print('</br>')
 #check if back or next need to appear
 if pgNum > 1:

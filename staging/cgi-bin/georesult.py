@@ -95,11 +95,6 @@ for x in gquery:
       </li>
     ''')
 
-print('''<form action="/cgi-bin/meteorslist.py" method="get">
-          <input type="submit" value="Return Home"/>
-          <input type="hidden" name="pg" value="1">
-        </form></br></br>''')
-
 print('</br>')
 
 print(html.footer)

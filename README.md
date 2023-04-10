@@ -43,8 +43,8 @@
 	<li>Search returns selection list of documents</li>
 	<li>Clean GUI design</li>
 	<li>Some documents should have images and should be stored using GridFS</li>
+	<li>In GUI, create another search field to find records in a certain area (using MongoGeo)</li>
 </ul>
 <h1>To Do:</h1>
 <ul>
-	<li>In GUI, create another search field to find records in a certain area (using MongoGeo)</li>
 </ul>
